@@ -1,10 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
-  <title>$Title$</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LofiSphere Radio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script type="text/javascript" th:src="@{/js/radio.js}" defer></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          animation: {
+            'gradient-x': 'gradient-x 20s ease infinite',
+            'gradient-y': 'gradient-y 20s ease infinite',
+            'gradient-xy': 'gradient-xy 20s ease infinite',
+          },
+          keyframes: {
+            'gradient-x': {
+              '0%, 100%': { 'background-position': '0% 50%' },
+              '50%': { 'background-position': '100% 50%' },
+            },
+            'gradient-y': {
+              '0%, 100%': { 'background-position': '50% 0%' },
+              '50%': { 'background-position': '50% 100%' },
+            },
+            'gradient-xy': {
+              '0%, 100%': { 'background-position': '0% 0%' },
+              '50%': { 'background-position': '100% 100%' },
+            },
+          },
+        }
+      }
+    }
+  </script>
+
 </head>
-<body>
-$END$
+
+<body class="bg-gradient-to-r from-purple-700 via-pink-700 to-red-700
+bg-[length:400%_400%] animate-gradient-x
+text-gray-100 flex flex-col items-center justify-center min-h-screen">
+
+  <h1 class="text-5xl font-bold text-mint-300 mb-4">LofiSphere</h1>
+  <p id="videoTitle" class="mb-6 text-white text-lg">Loading track...</p>
+
+  <!-- YouTube iframe placeholder -->
+  <div id="player-container" class="hidden">
+    <div id="player"></div>
+  </div>
+
+  <!-- Buttons -->
+  <div class="mt-6 flex space-x-4">
+    <button id="playBtn" class="px-4 py-2 bg-mint-400 text-white rounded hover:bg-emerald-600">Play / Unmute</button>
+    <button id="pauseBtn" class="px-4 py-2 bg-mint-400 text-white rounded hover:bg-emerald-600">Pause</button>
+  </div>
+
 </body>
+
 </html>
