@@ -4,9 +4,33 @@ document.addEventListener("DOMContentLoaded", function () {
     var pauseBtn = document.getElementById("pauseBtn");
     var playerContainer = document.getElementById("player-container");
 
-    var playlistId = "PLOzDu-MXXLlj7croDcwz33c-a5rpNEBNe";
-    var playlistLength = 10; // total number of songs
+    var playlistId = "RDCLAK5uy_kb7EBi6y3GrtJri4_ZH56Ms786DFEimbM";
+    var playlistLength = 95; // total number of songs
     var player;
+
+    const video = document.getElementById("bg-video");
+    const changeBtn = document.getElementById("changeBgBtn");
+
+    // List of background video paths
+    const videos = [
+        "/videos/background.mp4",           
+        "/videos/background2.mp4",       
+        "/videos/background3.mp4",       
+    ];
+
+    let currentIndex = 0;
+
+    changeBtn.addEventListener("click", () => {
+        currentIndex = (currentIndex + 1) % videos.length;
+        video.classList.add("opacity-0"); // fade out
+
+        setTimeout(() => {
+            video.setAttribute("src", videos[currentIndex]);
+            video.load();
+            video.play();
+            video.classList.remove("opacity-0");
+        }, 500); // fade duration
+    });
 
     // Load YouTube IFrame API
     var tag = document.createElement('script');
@@ -22,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 listType: 'playlist',
                 list: playlistId,
                 autoplay: 1,
-                mute: 1
+                mute: 0
             },
             events: {
                 'onReady': onPlayerReady,
@@ -57,6 +81,16 @@ document.addEventListener("DOMContentLoaded", function () {
         player.unMute();
         player.playVideo();
         updateTitle();
+    });
+
+    var nextBtn = document.getElementById("nextBtn");
+
+    // Next Button
+    nextBtn.addEventListener('click', function () {
+        if (player && player.nextVideo) {
+            player.nextVideo();   // skips to next video in the playlist
+            updateTitle();        // updates title immediately
+        }
     });
 
     pauseBtn.addEventListener('click', function () {

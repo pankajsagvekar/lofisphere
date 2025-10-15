@@ -7,54 +7,57 @@
   <title>LofiSphere Radio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script type="text/javascript" th:src="@{/js/radio.js}" defer></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          animation: {
-            'gradient-x': 'gradient-x 20s ease infinite',
-            'gradient-y': 'gradient-y 20s ease infinite',
-            'gradient-xy': 'gradient-xy 20s ease infinite',
-          },
-          keyframes: {
-            'gradient-x': {
-              '0%, 100%': { 'background-position': '0% 50%' },
-              '50%': { 'background-position': '100% 50%' },
-            },
-            'gradient-y': {
-              '0%, 100%': { 'background-position': '50% 0%' },
-              '50%': { 'background-position': '50% 100%' },
-            },
-            'gradient-xy': {
-              '0%, 100%': { 'background-position': '0% 0%' },
-              '50%': { 'background-position': '100% 100%' },
-            },
-          },
-        }
-      }
-    }
-  </script>
-
+  <link rel="shortcut icon" th:href="@{/img/radio.png}" type="image/x-icon">
 </head>
 
-<body class="bg-gradient-to-r from-purple-700 via-pink-700 to-red-700
-bg-[length:400%_400%] animate-gradient-x
-text-gray-100 flex flex-col items-center justify-center min-h-screen">
+<body class="relative text-gray-100 flex flex-col items-center justify-center min-h-screen overflow-hidden font-sans">
 
-  <h1 class="text-5xl font-bold text-mint-300 mb-4">LofiSphere</h1>
-  <p id="videoTitle" class="mb-6 text-white text-lg">Loading track...</p>
+  <!-- Background Video -->
+  <video autoplay muted loop playsinline id="bg-video" th:src="@{/videos/background.mp4}"
+    class="absolute inset-0 w-full h-full object-cover brightness-75 -z-10 transition-opacity duration-500">
+    Your browser does not support HTML5 video.
+  </video>
 
-  <!-- YouTube iframe placeholder -->
-  <div id="player-container" class="hidden">
-    <div id="player"></div>
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black/40 -z-10"></div>
+
+  <!-- Change Background Button -->
+  <button id="changeBgBtn"
+    class="absolute top-4 right-4 bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-2xl backdrop-blur-sm transition">
+    🔁 Change Background
+  </button>
+
+  <!-- Main Content -->
+  <div class="text-center space-y-4 z-10">
+    <h1 class="text-5xl font-bold mb-4 drop-shadow-lg">LofiSphere</h1>
+    <h3 class="text-2xl font-semibold mb-2 drop-shadow-md">Now Playing</h3>
+    <p id="videoTitle" class="text-lg text-white opacity-90">Loading track...</p>
+
+    <!-- YouTube iframe -->
+    <div id="player-container" class="hidden">
+      <div id="player"></div>
+    </div>
+
+    <!-- Buttons -->
+    <div class="mt-6 flex flex-wrap justify-center gap-4">
+      <button id="playBtn"
+        class="px-5 py-2 bg-white/20 hover:bg-white/30 text-white rounded-2xl backdrop-blur-sm transition">
+        ▶ Play
+      </button>
+      <button id="pauseBtn"
+        class="px-5 py-2 bg-white/20 hover:bg-white/30 text-white rounded-2xl backdrop-blur-sm transition">
+        ⏸ Pause
+      </button>
+      <button id="nextBtn"
+        class="px-5 py-2 bg-white/20 hover:bg-white/30 text-white rounded-2xl backdrop-blur-sm transition">
+        ⏭ Next
+      </button>
+      <button id="prevBtn"
+        class="px-5 py-2 bg-white/20 hover:bg-white/30 text-white rounded-2xl backdrop-blur-sm transition">
+        ⏮ Previous
+      </button>
+    </div>
   </div>
-
-  <!-- Buttons -->
-  <div class="mt-6 flex space-x-4">
-    <button id="playBtn" class="px-4 py-2 bg-mint-400 text-white rounded hover:bg-emerald-600">Play / Unmute</button>
-    <button id="pauseBtn" class="px-4 py-2 bg-mint-400 text-white rounded hover:bg-emerald-600">Pause</button>
-  </div>
-
 </body>
 
 </html>
