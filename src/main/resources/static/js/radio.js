@@ -4,8 +4,8 @@ document.addEventListener("DOMContentLoaded", function () {
     var pauseBtn = document.getElementById("pauseBtn");
     var playerContainer = document.getElementById("player-container");
 
-    var playlistId = "RDCLAK5uy_kb7EBi6y3GrtJri4_ZH56Ms786DFEimbM";
-    var playlistLength = 95; // total number of songs
+    var playlistId = "PLOzDu-MXXLlg5384VEAWMzgXSdU8HFwbS";
+    var playlistLength = 13; // total number of songs
     var player;
 
     const video = document.getElementById("bg-video");
