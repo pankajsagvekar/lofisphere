@@ -10,6 +10,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const video = document.getElementById("bg-video");
     const changeBtn = document.getElementById("changeBgBtn");
+    var nextBtn = document.getElementById("nextBtn");
+    var prevBtn = document.getElementById("prevBtn");
 
     // List of background video paths
     const videos = [
@@ -46,7 +48,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 listType: 'playlist',
                 list: playlistId,
                 autoplay: 1,
-                mute: 0
+                mute: 1,
             },
             events: {
                 'onReady': onPlayerReady,
@@ -83,17 +85,21 @@ document.addEventListener("DOMContentLoaded", function () {
         updateTitle();
     });
 
-    var nextBtn = document.getElementById("nextBtn");
-
-    // Next Button
     nextBtn.addEventListener('click', function () {
         if (player && player.nextVideo) {
-            player.nextVideo();   // skips to next video in the playlist
-            updateTitle();        // updates title immediately
+            player.nextVideo();
+            updateTitle();
         }
     });
 
     pauseBtn.addEventListener('click', function () {
         player.pauseVideo();
+    });
+
+    prevBtn.addEventListener('click', function () {
+        if (player && player.previousVideo) {
+            player.previousVideo();
+            updateTitle();
+        }
     });
 });
